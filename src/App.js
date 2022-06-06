@@ -12,6 +12,7 @@ import {Men} from './Pages/Men'
 import {Women} from './Pages/Women'
 import {Kids} from './Pages/Kids'
 import { Product } from './Pages/Product';
+import { Cart } from './Pages/Cart';
 function App() {
   return (
     <div className="App">
@@ -20,14 +21,17 @@ function App() {
        <Route path='/' element={<Home/>} /> 
        
          <Route path='men' element={<Men/>}/>
-         <Route path ='women/' element={<Women/>}>
+         <Route path='men/:id'  element={<Product/>}/>
+         <Route path ='women/' element={<Women/>}/>
            <Route path='women/:id'  element={<Product/>}/>
-         </Route>
+       
          <Route path='kids' element={<Kids/>}/>
+         <Route path='kids/:id'  element={<Product/>}/>
      
        <Route path= 'about' element={<About/>} /> 
        <Route path='faq' element={<Faq/>}/>
        <Route path= 'contact' element={<Contact/>}/> 
+       <Route path= 'addtocart' element={<Cart/>}/> 
        
      </Routes>
 
