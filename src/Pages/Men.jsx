@@ -1,35 +1,64 @@
-import React, { useEffect } from 'react'
-import axios from 'axios'
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import React, { useContext, useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { ProdContext } from "../context/ProdContext";
+
+import "./Products.css";
 export const Men = () => {
- 
-  const [man,setMan] = useState([])
-useEffect(() => {
+  const [page, setPage] = useState(1);
+  const  {id}  = useParams();
+  const { setGender } = useContext(ProdContext);
+  const navigate = useNavigate();
+  const [men, setmen] = useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:8080/men/?_page=${page}&_limit=6`).then((r) => {
+      console.log(r);
 
-  axios.get('http://localhost:8080/men')
-  .then((r)=> setMan(r.data))
-}, [ ])
+      console.log(r.data);
+      setmen(r.data);
+    });
+  }, [page]);
 
- 
-  
- 
- 
- 
+  const handleClick = (id) => {
+    setGender("men");
+    // console.log(id)
+    navigate(`${id}`);
+  };
+
   return (
-    <div> 
-
-<h1>Mens</h1>
-<div style={{display:'grid'}}>
-  {man.map((e)=>{
-    return <div key={e.img} style={{display:"grid" ,    gap:'20px', border:'1px solid teal' ,  }}> 
-    <h1>{e.title}</h1>
-    <img src={e.img} alt="" />
-    <p>{e.price}</p>
+    <div>
+      <h1>mens</h1>
+      <div>
+        <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+          {"<"}
+        </button>
+        <button disabled={page === 3} onClick={() => setPage(page + 1)}>
+          {">"}
+        </button>
+      </div>
+      <div className="show-products">
+        {men.map((e) => {
+          return (
+            <div className="single-product" key={e.img}>
+              <h4>{e.title}</h4>
+              <img
+                className="single-img"
+                // onClick={() => handleClick(e.id)}
+                src={e.img}
+                alt=""
+              />
+              <p>{`Price: $ ${e.price}`}</p>
+              <button
+                onClick={() => handleClick(e.id)}
+                className="products-button"
+              >
+                More Info
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
-  })}
-</div>
- 
-    </div>
-  )
-}
+  );
+};

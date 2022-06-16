@@ -1,0 +1,162 @@
+.product-box-id{
+display: flex;
+width: 90%;
+margin: auto;
+margin-bottom: 50px;
+box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+gap: 20px;
+
+}
+
+.prod-img-div{
+ box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+.prod-img{
+ width: '100%'; 
+ 
+}
+.left {
+ width: 60%;
+ /* border: 1px solid red; */
+}
+
+.left .bottom {
+ margin: 10px;
+ width: 100%;
+ display: flex;
+ height: 200px;
+ /* border: 1px solid red; */
+}
+
+.bottom div {
+ width: 100%;
+ height: auto;
+ /* border: 1px solid blue; */
+}
+
+.bottom img {
+ width: 100%;
+ height: 200px;
+ object-fit: contain;
+}
+
+.right {
+ width: 40%;
+ padding: 2%;
+ /* border: 1px solid red; */
+}
+
+.right .brand{
+ font-family: "Century Gothic";
+ font-size: 22px;
+ font-weight: 400;
+ font-style: normal; 
+ line-height: 20px;
+}
+
+.right .name{
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 16px;
+ font-weight: 400;
+ font-style: normal;
+ color: #757575; 
+ line-height: 20px;
+}
+
+.right .price{
+ font-family: "Roboto Mono";
+ font-size: 20px;
+ font-weight: 800;
+ font-style: normal;
+ color: #757575; 
+ line-height: 5px;
+}
+
+.right p{
+ font-family: "Roboto Mono";
+ font-size: 15px;
+ font-weight: 400;
+ font-style: normal;
+ color: #757575; 
+ line-height: 20px;
+ letter-spacing: 1px;
+}
+
+.options {
+ width: 200px;
+ height: 30px;
+ text-align: center;
+ border: 2px solid whitesmoke;
+ cursor: pointer;
+}
+
+.size{
+ margin: 0px 20px;
+ height: 30px;
+ background-color: #fefefe;
+ border: none;
+ cursor: pointer;
+}
+
+.right .bag {
+ margin-top: 10px;
+ width: 200px;
+ height: 30px;
+ color: white;
+ background-color: black;
+ border: none;
+ cursor: pointer;
+}
+
+.right .wish {
+ margin-top: 10px;
+ width: 200px;
+ height: 30px;
+ background-color: whitesmoke;
+ border: none;
+ cursor: pointer;
+}
+
+.accordion {
+ background-color: #eee;
+ color: #444;
+ cursor: pointer;
+ padding: 18px;
+ width: 100%;
+ text-align: left;
+ border: 1px solid white;
+ outline: none;
+ transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+ background-color: #ccc;
+}
+
+.panel {
+ padding: 0 18px;
+ background-color: white;
+ display: none;
+ overflow: hidden;
+}
+
+.panel li{
+ list-style-type: disc;
+ color: #000;
+ font-family: "Roboto Mono";
+ font-size: 15px;
+ font-weight: 400;
+ font-style: normal;
+ color: #757575; 
+ /* line-height: 20px; */
+ letter-spacing: 1px;
+}
+
+.hoverS{
+ cursor: pointer;
+}
+ul.a {
+ list-style-type: circle;
+ color: black;
+}

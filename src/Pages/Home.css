@@ -1,0 +1,16 @@
+.homecss{
+ width: 70%;
+ height: auto;
+ margin: auto;
+ display: grid;
+ grid-template-columns: repeat(2,1fr);
+ gap: 30px;
+margin-bottom: 100px;
+}
+.imgof{
+ width: 450px;
+ height: 350px;
+ padding: 10px;
+ box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+

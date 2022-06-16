@@ -1,9 +1,9 @@
  
-import './App.css';
+ 
 
 import {Routes,Route} from 'react-router-dom';
 import { Navbar } from './Component/Navbar';
- 
+import  Footer  from './Component/Footer';
 import { About } from './Pages/About';
 import { Faq } from './Pages/Faq';
 import {Contact} from './Pages/Contact'
@@ -34,6 +34,7 @@ function App() {
        <Route path= 'addtocart' element={<Cart/>}/> 
        
      </Routes>
+     <Footer/>
 
     </div>
   );

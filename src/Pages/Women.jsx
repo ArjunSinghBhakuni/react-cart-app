@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
- 
-import {   useNavigate, useSearchParams } from 'react-router-dom'
+import "./Products.css";
+import {   useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { ProdContext } from '../context/ProdContext';
  
 export const Women = () => {
-
-  
-  const [page, setPage] = useState( 1);
  
-
+  const [page, setPage] = useState( 1);
+  const {setGender} = useContext(ProdContext);
+  const {id}=useParams();
   const navigate = useNavigate();
   const [women,setWomen] = useState([])
 useEffect(() => {
    
-  axios.get(`http://localhost:8080/women/?_page=${page}&_limit=4`)
+  axios.get(`http://localhost:8080/women/?_page=${page}&_limit=6`)
   .then((r)=>{
     console.log(r)
+    
   console.log(r.data)  
     setWomen(r.data)
   } 
@@ -23,7 +24,7 @@ useEffect(() => {
 }, [page ])
 
  const  handleClick =(id)=>{
-
+setGender("women")
   navigate(`${id}`)
  }
  
@@ -37,21 +38,32 @@ useEffect(() => {
         <button disabled={page === 1} onClick={() => setPage(page-1)}>
         { '<' }
         </button>
-        <button   onClick={() => setPage(page+1)}>
+        <button  disabled={ page===3} onClick={() => setPage(page+1)}>
           { '>' }
         </button>
       </div>
-<div  style={{display:"grid" ,  gridTemplateColumns:"repeat(2,1fr)",  gap:'20px', border:'1px solid teal'  ,width:'90%',margin:'auto' }}>
-  {women.map((e)=>{
-    return <div  key={e.img} style={{  border:'1px solid teal' ,  }}  > 
-    <h3 >{e.title}</h3>
-    <img  onClick={()=>handleClick(e.id)} width='200px' height='200px' src={e.img} alt=""   />
-    <p>{e.price}</p>
-   
-    
-    </div>
-  })}
-</div>
+      <div className="show-products">
+        {women.map((e) => {
+          return (
+            <div className="single-product" key={e.img}>
+              <h4>{e.title}</h4>
+              <img
+                className="single-img"
+                // onClick={() => handleClick(e.id)}
+                src={e.img}
+                alt=""
+              />
+              <p>{`Price: $ ${e.price}`}</p>
+              <button
+                onClick={() => handleClick(e.id)}
+                className="products-button"
+              >
+                More Info
+              </button>
+            </div>
+          );
+        })}
+      </div>
  
     </div>
   )
