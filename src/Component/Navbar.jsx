@@ -1,7 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import { useDisclosure,useColorMode } from '@chakra-ui/react'
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  Button,
+  Text,
+} from '@chakra-ui/react'
+import { Cart } from "../Pages/Cart";
+import { AuthContext } from "../context/AuthConext";
+import { Icon} from '@chakra-ui/react'
+import { MoonIcon,SunIcon} from '@chakra-ui/icons'
+ 
 export const Navbar = () => {
+  const { colorMode, toggleColorMode } = useColorMode()
+  const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = React.useRef()
+const handlepay =()=>{
+  if(isAuth){
+    
+    
+    alert("payment succes")
+  }else {
+    alert("Login here")
+    navigate('login')
+  }
+}
+const {isAuth} = useContext(AuthContext)
 
   return (
     <div className="big-box-nav">
@@ -26,11 +58,23 @@ export const Navbar = () => {
          
         </div>
         <div className="box12">
-        <Link className="a2" to='/login'>Login</Link>
-          <Link className="a2" to='/account'>Account</Link>
+      {!isAuth ?  <Link className="a2" to='/login'>Login</Link>
+        :  <Link className="a2" to='/account'>Account</Link>
+    }
           <Link className="a2" to='/wishlish'>WishList</Link>
-          
-             
+      {
+      colorMode === 'light'? <Button style={{width:"20px" ,height:'20px'}} onClick={toggleColorMode}>
+    <MoonIcon/>
+     {/* {colorMode === 'light' ? 'Dark' : 'Light'} */}
+    </Button > :  <Button style={{width:"20px" ,height:'20px'}}  onClick={toggleColorMode}>
+      <SunIcon/> 
+       {/* {colorMode === 'light' ? 'Dark' : 'Light'} */}
+      </Button>
+      } 
+         {/* <Button onClick={toggleColorMode}>
+        {colorMode === 'light' ? 'Dark' : 'Light'}
+      </Button> */}
+      
             
         </div>
       </div>
@@ -46,9 +90,36 @@ export const Navbar = () => {
               </Link>
           </div>
         
-        <div className="bag">
+        <div className="shoping-bag-nav">
          
-          <Link to='/addtocart' className="label"> Shopping bag</Link>
+          {/* <Link to='/addtocart' > </Link> */}
+          <Text ref={btnRef} className="label" colorScheme='teal' onClick={onOpen}>
+          Shopping bag
+      </Text>
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+        
+        
+          <DrawerCloseButton />
+         
+ <Cart/>
+
+          <DrawerFooter>
+            <Button variant='outline' mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button onClick={handlepay} colorScheme='green'>Pay</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+  
+
           {/* <!-- <span >Shopping bag</span> --> */}
           <span className="spanbag">
             <i className="bi bi-bag"></i>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { ProdContext } from "../context/ProdContext";
-
+import { Button } from "@chakra-ui/react";
 import "./Products.css";
 export const Men = () => {
   const [page, setPage] = useState(1);
@@ -28,14 +28,14 @@ export const Men = () => {
 
   return (
     <div>
-      <h1>mens</h1>
-      <div>
-        <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-          {"<"}
-        </button>
-        <button disabled={page === 3} onClick={() => setPage(page + 1)}>
-          {">"}
-        </button>
+ 
+      <div className="btn-grooup">
+        <Button  disabled={page === 1} onClick={() => setPage(page - 1)}>
+          Prev
+        </Button>
+        <Button disabled={page === 2} onClick={() => setPage(page + 1)}>
+          Next
+        </Button>
       </div>
       <div className="show-products">
         {men.map((e) => {

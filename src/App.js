@@ -13,6 +13,8 @@ import {Women} from './Pages/Women'
 import {Kids} from './Pages/Kids'
 import { Product } from './Pages/Product';
 import { Cart } from './Pages/Cart';
+import Login from './Pages/Login';
+import Account from './Pages/Account';
 function App() {
   return (
     <div className="App">
@@ -28,8 +30,8 @@ function App() {
          <Route path='kids' element={<Kids/>}/>
          <Route path='kids/:id'  element={<Product/>}/>
      
-       <Route path= 'about' element={<About/>} /> 
-       <Route path='faq' element={<Faq/>}/>
+       <Route path= 'account' element={<Account/>} /> 
+       <Route path='login' element={<Login/>}/>
        <Route path= 'contact' element={<Contact/>}/> 
        <Route path= 'addtocart' element={<Cart/>}/> 
        

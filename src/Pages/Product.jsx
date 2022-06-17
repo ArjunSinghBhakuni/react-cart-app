@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProdContext } from "../context/ProdContext";
 import { useDisclosure } from '@chakra-ui/react'
 import "./Product.css";
@@ -18,15 +18,17 @@ import {
  
 } from '@chakra-ui/react'
 import { Cart } from "./Cart";
+import { AuthContext } from "../context/AuthConext";
  
 export const Product = () => {
   const [product, setProduct] = useState({});
-  const { gender, setGender } = useContext(ProdContext);
+   const { gender, setGender } = useContext(ProdContext);
   const { id } = useParams();
-
+  console.log(useParams())
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
-
+  const {isAuth} = useContext(AuthContext)
   useEffect(() => {
     axios
       .get(`http://localhost:8080/${gender}/${id}`)
@@ -36,15 +38,26 @@ export const Product = () => {
   const handleCart = (id) => {
     console.log(gender, id);
     axios.get(`http://localhost:8080/${gender}/${id}`).then((r) => {
-      setGender("");
+    //  setGender("");
       axios.post(`http://localhost:8080/addtocart`, {
         id: r.data.id,
         title: r.data.title,
-        img: r.data.img,
         price: r.data.price,
+        oldprice:r.data.price,
+        count:1,
+        img: r.data.img,
       });
     });
-  };
+  };const handlepay =()=>{
+    if(isAuth){
+      
+      
+      alert("payment succes")
+    }else {
+      alert("Login here")
+      navigate('/login')
+    }
+  }
 
   return (
     <div className="product-box-id">
@@ -62,10 +75,10 @@ export const Product = () => {
       </div> */}
       <div className="right">
         
-        <h2 className="product_name name">
+        <h2   className="product_name name">
           {product.title}
         </h2>
-        <h4 className="product_price price">{`$ ${product.price}`}</h4>
+        <h4 style={{marginTop:'20px' , marginBottom:'20px'}} className="product_price price">{`$ ${product.price}`}</h4>
         <p>VAT exception. VAT not included.</p>
         <p>item no. P00640538</p>
         <select className="options">
@@ -83,7 +96,7 @@ export const Product = () => {
         
  
 
- 
+        <button className="add-to-cart" onClick={() => handleCart(product.id)}>Add to Cart</button> <br/>
       <Button ref={btnRef} colorScheme='teal'  onClick={onOpen}>
      VIEW SHOPPING BAG
       </Button>
@@ -105,7 +118,7 @@ export const Product = () => {
             <Button variant='outline' mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme='blue'>Save</Button>
+            <Button onClick={handlepay} colorScheme='green'>Pay</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

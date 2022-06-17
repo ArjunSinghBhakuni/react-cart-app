@@ -73,6 +73,7 @@ gap: 20px;
 }
 
 .right p{
+ 
  font-family: "Roboto Mono";
  font-size: 15px;
  font-weight: 400;
@@ -160,3 +161,14 @@ ul.a {
  list-style-type: circle;
  color: black;
 }
+
+.add-to-cart{
+ background-color: black;
+ border: 1px solid;
+ color: white;
+ padding: 10px;
+border-radius: 10px; 
+width: 190px;
+}
+
+ 

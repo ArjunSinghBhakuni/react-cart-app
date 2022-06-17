@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
 import { ProdProvider } from './context/ProdContext';
 import { ChakraProvider } from '@chakra-ui/react';
+import { AuthProvider } from './context/AuthConext';
  
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,13 +14,15 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
      
-       
+       <AuthProvider>
+
    <ProdProvider>
 <ChakraProvider>
 
     <App />
 </ChakraProvider>
    </ProdProvider>
+       </AuthProvider>
     
      
     </BrowserRouter>
